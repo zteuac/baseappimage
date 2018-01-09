@@ -20,9 +20,10 @@ build:
         mv ./catalina.sh /usr/local/tomcat/bin/ 
         mv ./tomcat-users.xml  /usr/local/tomcat/conf/ 
         mv ./tomcat_cron /usr/local/tomcat/ 
-        mv ./tomcat /usr/local/tomcat/logrotate/
+        mv ./tomcat /usr/local/tomcat/logrotate
         mv ./nginx/nginx.conf /etc/nginx/
-        mv ./nginx/conf.d/tcp /etc/nginx/conf.d/tcp/
+        mv ./nginx/conf.d/default.conf /etc/nginx/conf.d/
+        mv ./nginx/conf.d/tcp /etc/nginx/conf.d/tcp
         mv ./run.sh /root/
         chmod 755 /root/run.sh 
         chmod 755 /usr/local/tomcat/bin/catalina.sh 
