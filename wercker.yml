@@ -31,7 +31,7 @@ build:
     - internal/docker-push:
         username: $DOCKER_USER
         password: $DOCKER_PASSWORD
-        repository: wcr.io/burningluffy1/uacprodmodel
+        repository: wcr.io/zteuac/baseappimage
         tag: $TAG
         ports: 8080
         cmd: "/root/run.sh"
