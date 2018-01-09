@@ -1,0 +1,54 @@
+    upstream mysql {          
+        #hash $remote_addr consistent;
+        server 10.30.15.227:3306 weight=6;
+        server 10.30.15.228:3306 backup;
+    }
+    
+    upstream redismaster {
+        #hash $remote_addr consistent;
+        server 10.30.15.217:6379 weight=6;
+        server 10.30.15.218:6379 backup;
+    }
+    
+    upstream redisslave {
+        #hash $remote_addr consistent;
+        server 10.30.15.217:6379 weight=1;
+        server 10.30.15.218:6379 weight=6;
+        server 10.30.15.219:6379 weight=6;
+    }
+    
+    upstream openldap {
+        #hash $remote_addr consistent;
+        server 10.30.15.220:389 weight=6;
+        server 10.30.15.221:389 weight=6;
+        server 10.30.15.222:389 weight=6;
+    }
+    
+    server {
+        listen 3306;
+        proxy_connect_timeout 30s;
+        #proxy_timeout 60m;
+        proxy_pass mysql;
+    }
+    
+    server {
+        listen 6379;
+        proxy_connect_timeout 30s;
+        #proxy_timeout 60m;
+        proxy_pass redismaster;
+    }
+    
+    server {
+        listen 6378;
+        proxy_connect_timeout 30s;
+        #proxy_timeout 60m;
+        proxy_pass redisslave;
+    }
+    
+    server {
+        listen 389;
+        proxy_connect_timeout 30s;
+        #proxy_timeout 60m;
+        proxy_pass openldap;
+    }
+

@@ -1,0 +1,34 @@
+box: 
+  id: centos
+  tag: 6.8
+steps:
+  - script: 
+    name: Build Image
+    code: |
+      yum localinstall -y https://objectstorage.us-ashburn-1.oraclecloud.com/p/yWwR4Al81y-vMBMwHssK9dEaPIifBZPkdKLNCCdczr0/n/zte/b/artifacts-apps/o/jdk-7u55-linux-x64.rpm
+      yum install redhat-lsb crontabs -y
+      yum clean all
+      cp ./tomcat.tar.gz /usr/local/ && tar -xvf /usr/loca/tomcat.tar.gz && rm -rf ./tomcat.tar.gz
+      export LANG=UTF-8 
+      export LANGUAGE=en_US:en 
+      export LC_ALL=en_US.UTF-8
+      mv ./nginx-1.11.6-1.el6.ngx.x86_64.rpm /usr/local/
+      chmod 755 /usr/local/nginx-1.11.6-1.el6.ngx.x86_64.rpm && rpm -ivh /usr/local/nginx-1.11.6-1.el6.ngx.x86_64.rpm
+      mv ./catalina.sh /usr/local/tomcat/bin/ 
+      mv ./tomcat-users.xml  /usr/local/tomcat/conf/ 
+      mv ./tomcat_cron /usr/local/tomcat/ 
+      mv ./tomcat /usr/local/tomcat/logrotate/
+      mv ./nginx/nginx.conf /etc/nginx/
+      mv ./nginx/conf.d/tcp /etc/nginx/conf.d/tcp/
+      mv ./run.sh /root/
+      chmod 755 /root/run.sh 
+      chmod 755 /usr/local/tomcat/bin/catalina.sh 
+      mkdir /var/lib/rsyslog/work/ 
+      chkconfig iptables off 
+  - internal/docker-push:
+      repository: burning1docker/uacprodmodel
+      username: $DOCKER_USER
+      password: $DOCKER_PASSWORD
+      tag: $TAG
+      ports: 8080
+      cmd: "/root/run.sh"

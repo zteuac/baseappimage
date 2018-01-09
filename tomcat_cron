@@ -1,0 +1,1 @@
+00 00 * * * /usr/sbin/logrotate -f /usr/local/tomcat/logrotate/tomcat
