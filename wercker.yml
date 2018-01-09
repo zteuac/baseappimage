@@ -3,7 +3,7 @@ box:
   tag: 6.8
 steps:
   - script: 
-    name: Build Image
+    name: build
     code: |
       yum localinstall -y https://objectstorage.us-ashburn-1.oraclecloud.com/p/yWwR4Al81y-vMBMwHssK9dEaPIifBZPkdKLNCCdczr0/n/zte/b/artifacts-apps/o/jdk-7u55-linux-x64.rpm
       yum install redhat-lsb crontabs -y
