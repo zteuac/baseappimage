@@ -22,7 +22,6 @@ build:
         mv ./tomcat_cron /usr/local/tomcat/ 
         mv ./tomcat /usr/local/tomcat/logrotate
         mv ./nginx/nginx.conf /etc/nginx/
-        mv ./nginx/conf.d/default.conf /etc/nginx/conf.d/
         mv ./nginx/conf.d/tcp /etc/nginx/conf.d/tcp
         mv ./run.sh /root/
         chmod 755 /root/run.sh 
@@ -30,9 +29,6 @@ build:
         mkdir /var/lib/rsyslog/work/ 
         chkconfig iptables off 
     - internal/docker-push:
-        repository: burning1docker/uacprodmodel
-        username: $DOCKER_USER
-        password: $DOCKER_PASSWORD
         tag: $TAG
         ports: 8080
         cmd: "/root/run.sh"
