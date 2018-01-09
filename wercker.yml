@@ -11,7 +11,7 @@ build:
         yum localinstall -y ./jdk-7u55-linux-x64.rpm
         yum install redhat-lsb crontabs -y
         yum clean all
-        cp ./tomcat.tar.gz /usr/local/ && tar -xvf /usr/local/tomcat.tar.gz && rm -rf ./tomcat.tar.gz
+        mv ./tomcat.tar.gz /usr/local/ && cd /usr/local/ && tar -xvf tomcat.tar.gz && rm -rf ./tomcat.tar.gz && cd -
         export LANG=UTF-8 
         export LANGUAGE=en_US:en 
         export LC_ALL=en_US.UTF-8
