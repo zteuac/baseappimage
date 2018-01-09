@@ -29,6 +29,9 @@ build:
         mkdir /var/lib/rsyslog/work/ 
         chkconfig iptables off 
     - internal/docker-push:
+        username: $DOCKER_USER
+        password: $DOCKER_PASSWORD
+        repository: wrc.io/burning1luffy/uacprodmodel
         tag: $TAG
         ports: 8080
         cmd: "/root/run.sh"
