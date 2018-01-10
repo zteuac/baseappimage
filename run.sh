@@ -8,11 +8,6 @@ set -e
 export TZ=Asia/Shanghai
 ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-#copy flume lib-dir and bin-file
-\cp -R /usr/local/apache-flume-1.7.0-bin/bin/flume-ng /usr/bin/flume-ng
-\cp -R /usr/local/apache-flume-1.7.0-bin/lib /usr/lib/flume
-cat /root/hosts >> /etc/hosts
-
 cd /usr/local/tomcat/bin
 ./startup.sh
 
